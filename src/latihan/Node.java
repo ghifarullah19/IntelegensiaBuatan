@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Node {
     private String nilai;
+    // List hubungan untuk menampung hubungan yang dimiliki oleh suatu kota (bisa
+    // lebih dari 1)
     private List<Hubungan> hubungan = new ArrayList<>();
     private List<Node> tetangga;
 
@@ -31,32 +33,27 @@ public class Node {
 
     public void addTetangga(Node node, boolean jenisHub) {
         tetangga.add(node);
+        // hubungan dibuat dari parameter jenisHub
         Hubungan hubungan = new Hubungan(this, node, jenisHub);
+        // Menambah hubungan yang telah dibuat ke list hubungan
         this.hubungan.add(hubungan);
-        // this.isKeluar = isKeluar;
     }
 
+    // Mendapatkan hubungan
     public boolean getHubungan(Node dua) {
+        // Inisialisasi nilai hubungan
         boolean hub = false;
+        // Iterasi list hubungan
         for (Hubungan h : this.hubungan) {
+            // Jika ditemukan hubungan antara kota satu dan kota dua
             if (h.satu.equals(this) && h.dua.equals(dua)) {
+                // Nilai hubungan diberikan dari list yang telah ditemukan
                 hub = h.getHubungan();
             }
         }
+        // Kembalikan hubungan
         return hub;
     }
-
-    // public void tampilHubungan(Node dua) {
-    // this.hubungan.tampil(this, dua);
-    // }
-
-    // public void setKeluar(boolean isKeluar) {
-    // this.isKeluar = isKeluar;
-    // }
-
-    // public boolean getKeluar() {
-    // return this.isKeluar;
-    // }
 
     @Override
     public boolean equals(Object obj) {
