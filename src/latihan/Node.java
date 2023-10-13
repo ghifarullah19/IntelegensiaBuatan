@@ -36,12 +36,14 @@ public class Node {
         // this.isKeluar = isKeluar;
     }
 
-    public void getHubungan(Node dua) {
+    public boolean getHubungan(Node dua) {
+        boolean hub = false;
         for (Hubungan h : this.hubungan) {
             if (h.satu.equals(this) && h.dua.equals(dua)) {
-                h.tampil();
+                hub = h.getHubungan();
             }
         }
+        return hub;
     }
 
     // public void tampilHubungan(Node dua) {

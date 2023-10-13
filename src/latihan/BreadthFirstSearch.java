@@ -34,11 +34,14 @@ public class BreadthFirstSearch {
             } else {
                 // System.out.println("Suksesor " + eval.getNode().getNilai());
                 for (Node successor : eval.getNode().getTetangga()) {
-                    // if (eval.getNode().getHubungan(successor)) {
-                    // eval.getNode().tampilHubungan(successor);
-                    // }
-                    // System.out.print(successor.getNilai() + " ");
-                    eval.getNode().getHubungan(successor);
+                    if (eval.getNode().getHubungan(successor)) {
+                        if (track.contains(successor)) {
+                            System.out.println(successor.getNilai());
+                        } else {
+                            track.add(successor);
+                        }
+                        // System.out.println(eval.getNode().getHubungan(successor));
+                    }
                     Solusi solusiSuksesor = new Solusi();
                     solusiSuksesor.setNode(successor);
                     solusiSuksesor.setNodes(eval.getNodes());

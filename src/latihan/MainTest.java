@@ -23,7 +23,7 @@ public class MainTest {
         Node vaslui = new Node("Vaslui");
         Node zerind = new Node("Zerind");
 
-        arad.addTetangga(zerind, false);
+        // arad.addTetangga(zerind, false);
         arad.addTetangga(sibiu, true);
         // arad.addTetangga(timisoara, true);
 
@@ -67,13 +67,13 @@ public class MainTest {
         // pitesti.addTetangga(craiova, false);
         pitesti.addTetangga(bucharest, true);
 
-        rimnicuVilcea.addTetangga(sibiu, false);
+        // rimnicuVilcea.addTetangga(sibiu, false);
         // rimnicuVilcea.addTetangga(craiova);
         rimnicuVilcea.addTetangga(pitesti, true);
 
-        sibiu.addTetangga(arad, false);
-        sibiu.addTetangga(oradea, true);
-        sibiu.addTetangga(fagaras, false);
+        // sibiu.addTetangga(arad, false);
+        // sibiu.addTetangga(oradea, true);
+        // sibiu.addTetangga(fagaras, false);
         sibiu.addTetangga(rimnicuVilcea, true);
 
         // timisoara.addTetangga(arad, false);
@@ -86,12 +86,17 @@ public class MainTest {
         // vaslui.addTetangga(iasi);
         // vaslui.addTetangga(urziceni);
 
-        zerind.addTetangga(arad, true);
-        zerind.addTetangga(oradea, false);
+        // zerind.addTetangga(arad, true);
+        // zerind.addTetangga(oradea, false);
 
-        System.out.println("BFS");
-        BreadthFirstSearch bfs = new BreadthFirstSearch();
-        bfs.search(arad, bucharest);
+        // System.out.println("BFS");
+        // BreadthFirstSearch bfs = new BreadthFirstSearch();
+        // bfs.search(bucharest, arad);
+
+        System.out.println("DLS");
+        DepthLimitedSearch dls = new DepthLimitedSearch();
+        dls.setLimit(100);
+        dls.search(arad, bucharest);
         System.out.println();
     }
 }
