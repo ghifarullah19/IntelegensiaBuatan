@@ -71,7 +71,7 @@ public class MainTest {
         // rimnicuVilcea.addTetangga(craiova);
         rimnicuVilcea.addTetangga(pitesti, true);
 
-        // sibiu.addTetangga(arad, false);
+        sibiu.addTetangga(arad, false);
         // sibiu.addTetangga(oradea, true);
         // sibiu.addTetangga(fagaras, false);
         sibiu.addTetangga(rimnicuVilcea, true);
