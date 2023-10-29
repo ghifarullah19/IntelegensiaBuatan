@@ -1,4 +1,4 @@
-package latihan;
+package id.ac.unpas.ib.latihan.searching;
 
 // Kelas ini digunakan sebagai "id" dari hubungan antarkota 
 public class Hubungan {

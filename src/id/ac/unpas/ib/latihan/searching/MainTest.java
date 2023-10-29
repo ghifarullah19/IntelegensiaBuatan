@@ -1,4 +1,4 @@
-package latihan;
+package id.ac.unpas.ib.latihan.searching;
 
 public class MainTest {
     public static void main(String[] args) {
