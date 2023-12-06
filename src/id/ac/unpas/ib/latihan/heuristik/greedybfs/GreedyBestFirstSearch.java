@@ -17,6 +17,8 @@ public class GreedyBestFirstSearch {
         queue.add(solusiStart);
         // Pesan untuk menampilkan "Mencari solusi dari start ke goal"
         System.out.println("Mencari solusi dari " + start.getNilai() + " ke " + goal.getNilai());
+        // solusiSuksesor dibuat untuk menyimpan semua nilai suksesor (node terpilih) dari eval (node yang sedang diuji)
+        Solusi solusiSuksesor = new Solusi();
 
         // Iterasi selama queue tidak kosong
         while (!queue.isEmpty()) {
@@ -30,22 +32,26 @@ public class GreedyBestFirstSearch {
             if (eval.getNode().equals(goal)) {
                 // Pesan solusi ditemukan
                 System.out.println("Solusi ditemukan: ");
+                // solusiSuksesor diberikan nilai node eval ke dalam list tetangga dari solusiSuksesor
+                solusiSuksesor.getNodes().add(eval.getNode());
 
                 // Iterasi seluruh node yang mengacu ke goal
-                for (NodeUCS node : eval.getNodes()) {
+                for (int i = 0; i < solusiSuksesor.getNodes().size(); i++) {
                     // Pesan nilai dari masing-masing node
-                    System.out.print(node.getNilai() + " -> ");
+                    if (i < solusiSuksesor.getNodes().size() - 1) {
+                        System.out.print(solusiSuksesor.getNodes().get(i).getNilai() + " -> ");
+                    } else {
+                        System.out.print(solusiSuksesor.getNodes().get(i).getNilai());
+                    }
                 }
 
-                // Pesan nilai dari goal
-                System.out.println(eval.getNode().getNilai());
                 // Iterasi dihentikan
                 break;
             } else {
                 // Pesan menampilkan suksesor dari eval
                 System.out.println("Suksesor " + eval.getNode().getNilai());
-                // solusiSuksesor untuk menyimpan semua nilai suksesor dari eval
-                Solusi solusiSuksesor = new Solusi();
+                // solusiSuksesor dibuat untuk menyimpan semua nilai suksesor (node terpilih) dari eval (node yang sedang diuji)
+                solusiSuksesor = new Solusi();
 
                 // best untuk menyimpan node terbaik dari eval
                 NodeUCS best = null;
@@ -80,22 +86,38 @@ public class GreedyBestFirstSearch {
 
                 // successor untuk menyimpan node terpilih
                 NodeUCS successor = best;
-                // solusiSuksesor menyimpan node terpilih
+                // solusiSuksesor diberikan nilai node terpilih
                 solusiSuksesor.setNode(successor);
-                // solusiSuksesor menyimpan semua node tetangga dari eval
+                // solusiSuksesor diberikan nilai semua node tetangga dari node terpilih tersebut
                 solusiSuksesor.setNodes(eval.getNodes());
-                // solusiSuksesor menyimpan node eval ke dalam tetangga
+                // solusiSuksesor diberikan nilai node eval ke dalam list tetangga dari solusiSuksesor
                 solusiSuksesor.getNodes().add(eval.getNode());
 
+                this.tampilSolusi(solusiSuksesor);
+                
                 // Pesan menampilkan enter (\n)
                 System.out.println();
+                
                 // Pesan menampilkan node terpilih dan costnya
                 System.out.println("Node terpilih: " + best.getNilai() + " (" + min + ")");
-                // solusiSuksesor dimasukan ke dalam queue
+                
+                // queue diupdate nilainya menjadi solusiSuksesor
                 queue.offer(solusiSuksesor);
                 System.out.println();
             }
         }
-
+    }
+    
+    public void tampilSolusi(Solusi solusiSuksesor) {
+        System.out.println("\n\n===Printing solusiSuksesor: ");
+        for (int i = 0; i < solusiSuksesor.getNodes().size(); i++) {
+            // Pesan nilai dari masing-masing node
+            if (i < solusiSuksesor.getNodes().size() - 1) {
+                System.out.print(solusiSuksesor.getNodes().get(i).getNilai() + " -> ");
+            } else {
+                System.out.print(solusiSuksesor.getNodes().get(i).getNilai());
+            }
+        }
+        System.out.println("\n===Done");
     }
 }

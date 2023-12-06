@@ -16,6 +16,7 @@ public class DepthLimitedSearch {
     public void search(Node start, Node goal) {
         System.out.println("Mencari solusi dari "+start.getNilai()+" ke "+goal.getNilai());
         Node eval = start;
+        
         for (int i = 0; i < limit; i++) {
             System.out.println("Level "+i+" evaluasi: "+eval.getNilai());
             if (eval.equals(goal)) {

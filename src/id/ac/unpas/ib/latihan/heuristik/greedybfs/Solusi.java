@@ -3,9 +3,9 @@ package id.ac.unpas.ib.latihan.heuristik.greedybfs;
 import java.util.ArrayList;
 import java.util.List;
 
-// Solusi untuk menyimpan node-node yang menjadi solusi yang ditemukan
+// Solusi untuk menyimpan node-node yang menjadi solusi yang telah ditemukan
 public class Solusi {
-    // nodes untuk menyimpan tetangga dari node yang menjadi solusi
+    // nodes untuk menyimpan tetangga dari node-node yang terpilih menjadi solusi
     private List<NodeUCS> nodes;
     // node untuk menyimpan node yang menjadi solusi
     private NodeUCS node;

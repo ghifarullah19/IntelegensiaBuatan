@@ -10,7 +10,7 @@ public class NodeUCS {
     // cost untuk menyimpan biaya dari node
     private int cost;
     // isVisited untuk menyimpan nilai apakah node sudah dikunjungi atau belum
-    public boolean isVisited;
+    private boolean isVisited;
 
     // tetangga untuk menyimpan node tetangga dari node yang bersangkutan
     private List<NodeUCS> tetangga;
@@ -51,6 +51,18 @@ public class NodeUCS {
     public int getCost() {
         // mengembalikan nilai biaya dari node
         return cost;
+    }
+
+    // fungsi untuk mengubah nilai isVisited dari node
+    public void setIsVisited(boolean isVisited) {
+        // mengubah nilai isVisited dari parameter
+        this.isVisited = isVisited;
+    }
+
+    // fungsi untuk mendapatkan nilai isVisited dari node
+    public boolean getIsVisited() {
+        // mengembalikan nilai isVisited
+        return isVisited;
     }
 
     // fungsi untuk mengubah tetangga dan tetanggaCost dari node

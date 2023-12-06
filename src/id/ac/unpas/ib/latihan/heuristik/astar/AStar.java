@@ -22,6 +22,9 @@ public class AStar {
 
         // Pesan untuk menampilkan "Mencari solusi dari Arad ke Bucharest"
         System.out.println("Mencari solusi dari " + start.getNilai() + " ke " + goal.getNilai());
+        
+        // solusiSuksesor untuk menyimpan semua nilai suksesor dari eval
+        Solusi solusiSuksesor = new Solusi();
 
         // Iterasi selama queue tidak kosong
         while (!queue.isEmpty()) {
@@ -38,14 +41,18 @@ public class AStar {
                 // Pesan solusi ditemukan
                 System.out.println("Solusi ditemukan: ");
 
+                // node eval dimasukan ke tetangga node suksesor
+                solusiSuksesor.getNodes().add(eval.getNode());
+                
                 // Iterasi seluruh node yang mengacu ke goal
-                for (NodeUCS node : eval.getNodes()) {
+                for (int i = 0; i < solusiSuksesor.getNodes().size(); i++) {
                     // Pesan nilai dari masing-masing node
-                    System.out.print(node.getNilai() + " -> ");
+                    if (i < solusiSuksesor.getNodes().size() - 1) {
+                        System.out.print(solusiSuksesor.getNodes().get(i).getNilai() + " -> ");
+                    } else {
+                        System.out.print(solusiSuksesor.getNodes().get(i).getNilai());
+                    }
                 }
-
-                // Pesan nilai dari goal
-                System.out.print(eval.getNode().getNilai());
 
                 // Iterasi dihentikan
                 break;
@@ -56,9 +63,9 @@ public class AStar {
                 System.out.println("Suksesor " + eval.getNode().getNilai() + ": ");
 
                 // solusiSuksesor untuk menyimpan semua nilai suksesor dari eval
-                Solusi solusiSuksesor = new Solusi();
+                solusiSuksesor = new Solusi();
                 // beri nilai true pada eval yang telah dijumpai
-                eval.getNode().isVisited = true;
+                eval.getNode().setIsVisited(true);
 
                 // inisiasi node best
                 NodeUCS best = null;
@@ -86,11 +93,11 @@ public class AStar {
                         int apakahMin = node.getCost() + costTetangga + costAll;
 
                         // Pesan
-                        System.out.print(node.getNilai() + " (" + node.getCost() + " + " +
-                                costTetangga + " + " + costAll + "), = " + apakahMin + "\n");
+                        System.out.print(node.getNilai() + " (" + (costTetangga + costAll) + " + " +
+                                node.getCost() + "), = " + apakahMin + "\n");
 
                         // jika node tersebut telah dilalui, tampilkan pesan
-                        if (node.isVisited == true) {
+                        if (node.getIsVisited() == true) {
                             // Pesan
                             System.out.println(node.getNilai() + " sudah dikunjungi.\n");
                         }
@@ -98,7 +105,7 @@ public class AStar {
                         // jika nilai min kurang dari nilai apakahMin dan node itu belum dilalui,
                         // maka min diberikan nilai apakahMin, best diberikan nilai node, dan
                         // cost diberikan nilai i. lalu node tersebut diberi tanda bahwa telah dilalui
-                        if (min > apakahMin && node.isVisited == false) {
+                        if (min > apakahMin && node.getIsVisited() == false) {
                             // min diberikan nilai apakahMin
                             min = apakahMin;
                             // best diberikan nilai node
@@ -106,7 +113,7 @@ public class AStar {
                             // cost diberikan nilai i
                             cost = i;
                             // node diatur nilai isVisitednya menjadi true
-                            node.isVisited = true;
+                            node.setIsVisited(true);
                         }
 
                     }
@@ -126,8 +133,10 @@ public class AStar {
                 // tetangga dari node eval menjadi tetangga dari node successor
                 solusiSuksesor.setNodes(eval.getNodes());
                 // node eval dimasukan ke tetangga node suksesor
-                solusiSuksesor.getNodes().add(eval.getNode());
+                solusiSuksesor.addTetangga(eval.getNode());
 
+                // this.tampilSolusi(solusiSuksesor);
+                
                 // Menambahkan enter (\n)
                 System.out.println();
                 // Pesan node terpilih dengan nilai jarak dari node ke goal ditambah jarak antar
@@ -137,10 +146,23 @@ public class AStar {
                 // costAll diupadate nilainya dengan nilai jarak antar node yang terpilih
                 costAll += eval.getNode().getTetanggaCost().get(cost);
 
-                // solusiSuksesor dimasukan ke queue
+                // queue diupdate nilainya menjadi solusiSuksesor
                 queue.offer(solusiSuksesor);
                 System.out.println();
             }
         }
+    }
+    
+    public void tampilSolusi(Solusi solusiSuksesor) {
+        System.out.println("\n\n===Printing solusiSuksesor: ");
+        for (int i = 0; i < solusiSuksesor.getNodes().size(); i++) {
+            // Pesan nilai dari masing-masing node
+            if (i < solusiSuksesor.getNodes().size() - 1) {
+                System.out.print(solusiSuksesor.getNodes().get(i).getNilai() + " -> ");
+            } else {
+                System.out.print(solusiSuksesor.getNodes().get(i).getNilai());
+            }
+        }
+        System.out.println("\n===Done");
     }
 }
